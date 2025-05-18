@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class PlayerMovement : MonoBehaviour
 {
+    // BASIS FROM https://www.youtube.com/watch?v=f473C43s8nE&list=PLmo33sM32UcqXt29JkFr4KP4CPktmgi9o
+
     [Header("Movement")]
     public float moveSpeed;
     float preRunSpeed;
@@ -15,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     private bool readyToJump = true;
+
+    [SerializeField] private ClimbingWallTrigger[] climbingWallTrigger;
+    public float climbingSpeed;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -68,13 +73,17 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && !IsTouchingWall())
         {
             readyToJump = false;
 
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        else if (IsTouchingWall() && Input.GetKey("space"))
+        {
+            Climb();
         }
     }
 
@@ -84,11 +93,11 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         //on ground
-        if(grounded)
+        if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         //in air
-        else if(!grounded)
+        else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
@@ -100,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeed * 2f; //running
             running = true;
         }
-        else if(!Input.GetKey("left shift") && running && grounded)
+        else if (!Input.GetKey("left shift") && running && grounded)
         {
             moveSpeed = preRunSpeed; //stop running
             running = false;
@@ -114,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
-        
+
     }
 
     private void Jump()
@@ -130,4 +139,20 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
+    private bool IsTouchingWall()
+    {
+        for (int i = 0; i < climbingWallTrigger.Length; i++)
+        {
+            if (climbingWallTrigger[i].GetIsInDaWall())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void Climb()
+    { 
+        rb.velocity = new Vector3(rb.velocity.x, climbingSpeed, rb.velocity.z);
+    }
 }
