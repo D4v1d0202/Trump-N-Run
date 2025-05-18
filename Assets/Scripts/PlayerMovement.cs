@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    float preRunSpeed;
+    bool running;
 
     public float groundDrag;
 
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        preRunSpeed = moveSpeed;
+        running = false;
     }
 
     void Update()
@@ -90,14 +94,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
+
+        if (Input.GetKey("left shift") && !running && grounded)
+        {
+            moveSpeed = moveSpeed * 2f; //running
+            running = true;
+        }
+        else if(!Input.GetKey("left shift") && running && grounded)
+        {
+            moveSpeed = preRunSpeed; //stop running
+            running = false;
+        }
+
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //limit velocity if needed
-        if(flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+        
     }
 
     private void Jump()
