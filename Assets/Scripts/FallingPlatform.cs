@@ -35,6 +35,7 @@ public class FallingPlatform : MonoBehaviour
                 triggered = false;
                 triggerTimerReached = true;
                 fallingTimer = 0;
+                fallingTimerReached = false;
             }
         }
 
@@ -46,11 +47,12 @@ public class FallingPlatform : MonoBehaviour
             if (!fallingTimerReached && fallingTimer > 3) // falling 3 secs
             {
                 falling = false;
-                rb.constraints = RigidbodyConstraints.FreezePosition;
                 transform.position = defaultPosition;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
 
                 fallingTimerReached = true;
                 triggeredTimer = 0;
+                triggerTimerReached = false;
             }
         }
 
