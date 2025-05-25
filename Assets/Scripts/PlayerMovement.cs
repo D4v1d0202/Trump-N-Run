@@ -19,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
     private bool readyToJump = true;
 
     [SerializeField] private ClimbingWallTrigger[] climbingWallTrigger; //REMEMBER TO ALWAYS ADD NEW CLIMBING WALLS TO ARRAY
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.3f;
+    [SerializeField] private LayerMask whatIsGround;
+
     public float climbingSpeed;
 
     [Header("Keybinds")]
@@ -26,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
+    // public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
     bool grounded;
 
     public Transform orientation;
@@ -49,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.CheckSphere(groundCheck.position, groundDistance, whatIsGround);
         //Debug.Log(grounded);
 
         MyInput();
@@ -94,11 +99,11 @@ public class PlayerMovement : MonoBehaviour
 
         //on ground
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 15f, ForceMode.Force);
 
         //in air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 15f * airMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl()
@@ -106,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey("left shift") && !running && grounded)
         {
-            moveSpeed = moveSpeed * 2f; //running
+            moveSpeed = moveSpeed * 1.5f; //running
             running = true;
         }
         else if (!Input.GetKey("left shift") && running && grounded)
