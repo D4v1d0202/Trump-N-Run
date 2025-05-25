@@ -20,10 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private ClimbingWallTrigger[] climbingWallTrigger; //REMEMBER TO ALWAYS ADD NEW CLIMBING WALLS TO ARRAY
 
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundDistance = 0.3f;
-    [SerializeField] private LayerMask whatIsGround;
-
     public float climbingSpeed;
 
     [Header("Keybinds")]
@@ -31,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public float playerHeight;
-    // public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
+    public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
     bool grounded;
 
     public Transform orientation;
@@ -54,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //ground check
-        grounded = Physics.CheckSphere(groundCheck.position, groundDistance, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         //Debug.Log(grounded);
 
         MyInput();
