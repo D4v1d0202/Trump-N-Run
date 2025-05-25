@@ -741,6 +741,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3861794594204812576, guid: 935e8d8eb9675441d902d0db720276f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4610838893213348153, guid: 935e8d8eb9675441d902d0db720276f3, type: 3}
       propertyPath: m_Name
       value: ClimbingWall 2
@@ -1405,7 +1409,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -1478,7 +1482,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 0.99059916}
   m_Center: {x: 0, y: 0, z: -0.0047004074}
@@ -2109,13 +2113,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169414249}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.266791, w: 0.9637544}
-  m_LocalPosition: {x: -16.03, y: -11.14, z: -8.088583}
+  m_LocalRotation: {x: -0, y: -0, z: 0.22896011, w: 0.9734358}
+  m_LocalPosition: {x: -16.85, y: -9.82, z: -11.83}
   m_LocalScale: {x: 4.12, y: 1, z: 3.34}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 856799625}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.472}
 --- !u!4 &1292108438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1596599555602485537, guid: 8f6f7b7cc58724de983fd13b58db5eab, type: 3}
@@ -3281,14 +3285,12 @@ MonoBehaviour:
   climbingWallTrigger:
   - {fileID: 850934575}
   - {fileID: 1468240624}
-  groundCheck: {fileID: 1632756551}
-  groundDistance: 0.3
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
   climbingSpeed: 5
   jumpKey: 32
   playerHeight: 2.1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
   orientation: {fileID: 2033843530}
 --- !u!1 &2144448537
 GameObject:
