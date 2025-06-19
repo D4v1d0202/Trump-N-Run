@@ -50,8 +50,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         //Debug.Log(grounded);
+
+        if (GetComponent<StickyPlatformTracker>().isOnMovingPlatform
+        || Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+        
 
         MyInput();
         SpeedControl();
