@@ -8,7 +8,7 @@ public class ClimbingWallTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "PlayerObj")
+        if (collision.gameObject.name == "Player")
         {
             isInDaWall = true;
         }
@@ -16,7 +16,7 @@ public class ClimbingWallTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.name == "PlayerObj")
+        if (collision.gameObject.name == "Player")
         {
             isInDaWall = false;
         }

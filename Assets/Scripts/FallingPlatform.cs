@@ -61,7 +61,7 @@ public class FallingPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "PlayerObj")
+        if (collision.gameObject.name == "Player")
         {
             triggered = true;
         }
