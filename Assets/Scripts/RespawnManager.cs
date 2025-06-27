@@ -7,6 +7,7 @@ public class RespawnManager : MonoBehaviour
     public Transform player;
     public Transform playerStartPoint;
     public Transform playerCheckpoint1;
+    public Transform playerCheckpoint2;
 
     private Transform currentRespawnPoint;
 
@@ -17,10 +18,14 @@ public class RespawnManager : MonoBehaviour
 
     void Update()
     {
-        if (player.position.x < playerCheckpoint1.position.x)
+        if (player.position.x < playerCheckpoint2.position.x)
         {
-            currentRespawnPoint = playerCheckpoint1;
+            currentRespawnPoint = playerCheckpoint2;
         }
+        else if (player.position.x < playerCheckpoint1.position.x)
+            {
+                currentRespawnPoint = playerCheckpoint1;
+            }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
