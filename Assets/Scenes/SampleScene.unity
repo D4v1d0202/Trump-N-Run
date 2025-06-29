@@ -4706,6 +4706,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1596599555602485537, guid: 8f6f7b7cc58724de983fd13b58db5eab, type: 3}
   m_PrefabInstance: {fileID: 1806483272}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1446789634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2163030414373879957, guid: 935e8d8eb9675441d902d0db720276f3, type: 3}
+  m_PrefabInstance: {fileID: 1501459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7266228e53fc346e088e39c926c835dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1446930439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,6 +7210,7 @@ MonoBehaviour:
   - {fileID: 1468240624}
   - {fileID: 1035084844}
   - {fileID: 1808351744}
+  - {fileID: 1446789634}
   climbingSpeed: 5
   jumpKey: 32
   playerHeight: 2.1
