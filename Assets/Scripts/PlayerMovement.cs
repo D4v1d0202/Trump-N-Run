@@ -25,6 +25,20 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
+    [Header("Audio")] // Audio
+    public AudioSource audioSource;
+    public AudioClip[] footstepClips;
+    public AudioClip landingClip;
+
+    public float stepInterval = 0.5f;
+    [Range(0f, 1f)]
+    public float footstepVolume = 0.7f;
+    [Range(0f, 1f)]
+    public float landingVolume = 0.2f;
+    private float stepTimer = 0f;
+
+    private bool wasGroundedLastFrame = false;
+
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
@@ -62,7 +76,13 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = false;
         }
-        
+
+        // for Landing Sound 
+        if (!wasGroundedLastFrame && grounded)
+        {
+            PlayLandingSound();
+        }
+        wasGroundedLastFrame = grounded; // 
 
         MyInput();
         SpeedControl();
@@ -72,7 +92,39 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+        // for Footstep Sounds
+        if (grounded && (Mathf.Abs(rb.velocity.x) > 0.1f || Mathf.Abs(rb.velocity.z) > 0.1f))
+        {
+            stepTimer += Time.deltaTime;
+            if (stepTimer >= stepInterval)
+            {
+                PlayRandomFootstep();
+                stepTimer = 0f;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        } //
+
     }
+
+    // Sound
+    private void PlayRandomFootstep()
+    {
+        if (footstepClips.Length == 0 || audioSource == null) return;
+        int index = Random.Range(0, footstepClips.Length);
+        audioSource.PlayOneShot(footstepClips[index], footstepVolume);
+    }
+
+    private void PlayLandingSound()
+    {
+        if (landingClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(landingClip, landingVolume);
+        }
+    } 
 
     private void FixedUpdate()
     {
