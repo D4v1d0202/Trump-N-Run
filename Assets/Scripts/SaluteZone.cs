@@ -5,32 +5,42 @@ using UnityEngine;
 public class SaluteZone : MonoBehaviour
 {
     private bool playerInZone = false;
-    public bool hasSaluted = false;
+    private bool hasSaluted = false;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInZone = true;
+            hasSaluted = false;
             Debug.Log("Player ist in der Salutier-Zone");
         }
     }
 
     void OnTriggerExit(Collider other)
+{
+    if (other.CompareTag("Player"))
     {
-        if (other.CompareTag("Player"))
+        if (!hasSaluted)
         {
-            playerInZone = false;
-            Debug.Log("Player hat die Salutier-Zone verlassen");
+            DecisionManager.Instance.SetDecision("Saluted", false);
+            Debug.Log("Player hat NICHT salutiert!");
         }
-    }
 
-    void Update()
-    {
-        if (playerInZone && Input.GetKeyDown(KeyCode.P))
-        {
-            hasSaluted = true;
-            Debug.Log("Player hat salutiert!");
-        }
+        DecisionManager.Instance.HandleSaluteBarriers();
+        playerInZone = false;
     }
+}
+
+void Update()
+{
+    if (playerInZone && Input.GetKeyDown(KeyCode.P))
+    {
+        hasSaluted = true;
+        DecisionManager.Instance.SetDecision("Saluted", true);
+        Debug.Log("Player hat salutiert!");
+
+        DecisionManager.Instance.HandleSaluteBarriers();
+    }
+}
 }
