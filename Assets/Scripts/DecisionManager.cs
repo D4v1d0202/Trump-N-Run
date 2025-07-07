@@ -12,6 +12,9 @@ public class DecisionManager : MonoBehaviour
     public GameObject leftBlocker;
     public GameObject rightBlocker;
 
+    public GameObject leftPosterBlocker;
+    public GameObject rightPosterBlocker;
+
     private void Awake()
     {
         if (Instance == null)
@@ -49,25 +52,66 @@ public class DecisionManager : MonoBehaviour
     }
 
     public void HandleSaluteBarriers()
-{
-    if (leftBlocker == null || rightBlocker == null)
     {
-        Debug.LogWarning("Blocker nicht zugewiesen!");
+        if (leftBlocker == null || rightBlocker == null)
+        {
+            Debug.LogWarning("Blocker nicht zugewiesen!");
+            return;
+        }
+
+        leftBlocker.SetActive(false);  // sicherheitshalber aus
+        rightBlocker.SetActive(false); // sicherheitshalber aus
+
+        if (GetDecision("Saluted"))
+        {
+            leftBlocker.SetActive(true);
+            Debug.Log("Linker Weg blockiert (Saluted = true)");
+        }
+        else
+        {
+            rightBlocker.SetActive(true);
+            Debug.Log("Rechter Weg blockiert (Saluted = false)");
+        }
+    }
+
+public void HandlePosterBarriers(string decisionKey)
+{
+    if (leftPosterBlocker == null || rightPosterBlocker == null)
+    {
+        Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
         return;
     }
 
-    leftBlocker.SetActive(false);  // sicherheitshalber aus
-    rightBlocker.SetActive(false); // sicherheitshalber aus
+    leftPosterBlocker.SetActive(false);
+    rightPosterBlocker.SetActive(false);
 
-    if (GetDecision("Saluted"))
+    bool toreDown = GetDecision(decisionKey);
+
+    if (decisionKey.Contains("Left"))
     {
-        leftBlocker.SetActive(true);
-        Debug.Log("Linker Weg blockiert (Saluted = true)");
+        if (toreDown)
+        {
+            leftPosterBlocker.SetActive(true);
+            Debug.Log("Poster (Left) abgerissen → rechter Weg offen");
+        }
+        else
+        {
+            rightPosterBlocker.SetActive(true);
+            Debug.Log("Poster (Left) NICHT abgerissen → rechter Weg zu");
+        }
     }
-    else
+    else if (decisionKey.Contains("Right"))
     {
-        rightBlocker.SetActive(true);
-        Debug.Log("Rechter Weg blockiert (Saluted = false)");
+        if (toreDown)
+        {
+            rightPosterBlocker.SetActive(true);
+            Debug.Log("Poster (Right) abgerissen → linker Weg offen");
+        }
+        else
+        {
+            leftPosterBlocker.SetActive(true);
+            Debug.Log("Poster (Right) NICHT abgerissen → linker Weg zu");
+        }
     }
 }
 }
