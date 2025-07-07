@@ -8,8 +8,11 @@ public class RespawnManager : MonoBehaviour
     public Transform playerStartPoint;
     public Transform playerCheckpoint1;
     public Transform playerCheckpoint2;
+    public Transform playerCheckpoint3;
 
     private Transform currentRespawnPoint;
+
+    private int currentCheckpointIndex = 0;
 
     void Start()
     {
@@ -18,14 +21,21 @@ public class RespawnManager : MonoBehaviour
 
     void Update()
     {
-        if (player.position.x < playerCheckpoint2.position.x)
+        if (player.position.x < playerCheckpoint3.position.x && currentCheckpointIndex < 3)
+        {
+            currentRespawnPoint = playerCheckpoint3;
+            currentCheckpointIndex = 3;
+        }
+        else if (player.position.x < playerCheckpoint2.position.x && currentCheckpointIndex < 2)
         {
             currentRespawnPoint = playerCheckpoint2;
+            currentCheckpointIndex = 2;
         }
-        else if (player.position.x < playerCheckpoint1.position.x)
-            {
-                currentRespawnPoint = playerCheckpoint1;
-            }
+        else if (player.position.x < playerCheckpoint1.position.x && currentCheckpointIndex < 1)
+        {
+            currentRespawnPoint = playerCheckpoint1;
+            currentCheckpointIndex = 1;
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -38,6 +48,16 @@ public class RespawnManager : MonoBehaviour
 
             player.position = currentRespawnPoint.position;
             player.rotation = currentRespawnPoint.rotation;
+        }
+    }
+
+    public void SetCheckpoint(Transform checkpointTransform, int checkpointIndex)
+    {
+        if (checkpointIndex > currentCheckpointIndex)
+        {
+            currentCheckpointIndex = checkpointIndex;
+            currentRespawnPoint = checkpointTransform;
+
         }
     }
 }
