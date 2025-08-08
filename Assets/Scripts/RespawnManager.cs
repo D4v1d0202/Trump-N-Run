@@ -21,21 +21,21 @@ public class RespawnManager : MonoBehaviour
 
     void Update()
     {
-        if (player.position.x < playerCheckpoint3.position.x && currentCheckpointIndex < 3)
-        {
-            currentRespawnPoint = playerCheckpoint3;
-            currentCheckpointIndex = 3;
-        }
-        else if (player.position.x < playerCheckpoint2.position.x && currentCheckpointIndex < 2)
-        {
-            currentRespawnPoint = playerCheckpoint2;
-            currentCheckpointIndex = 2;
-        }
-        else if (player.position.x < playerCheckpoint1.position.x && currentCheckpointIndex < 1)
-        {
-            currentRespawnPoint = playerCheckpoint1;
-            currentCheckpointIndex = 1;
-        }
+        // if (player.position.x < playerCheckpoint3.position.x && currentCheckpointIndex < 3)
+        // {
+        //     currentRespawnPoint = playerCheckpoint3;
+        //     currentCheckpointIndex = 3;
+        // }
+        // else if (player.position.x < playerCheckpoint2.position.x && currentCheckpointIndex < 2)
+        // {
+        //     currentRespawnPoint = playerCheckpoint2;
+        //     currentCheckpointIndex = 2;
+        // }
+        // else if (player.position.x < playerCheckpoint1.position.x && currentCheckpointIndex < 1)
+        // {
+        //     currentRespawnPoint = playerCheckpoint1;
+        //     currentCheckpointIndex = 1;
+        // }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
