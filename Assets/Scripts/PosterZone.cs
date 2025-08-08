@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class PosterZone : MonoBehaviour
 {
-    public string decisionKey = "ToreDownPoster_Left"; // or "ToreDownPoster_Right"
-    public GameObject posterObject;
-
-    private bool playerInZone = false;
-    private bool hasTornDown = false;
+    public PosterInteractable posterInteractable;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInZone = true;
-            hasTornDown = false;
-            Debug.Log("Player ist in der Poster-Zone: " + decisionKey);
+            posterInteractable.SetPlayerInZone(true);
+            Debug.Log("Player ist in der Poster-Zone: " + posterInteractable.decisionKey);
         }
     }
 
@@ -24,29 +19,8 @@ public class PosterZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInZone = false;
-            if (!hasTornDown)
-            {
-                Debug.Log("Player hat das Poster nicht abgerissen: " + decisionKey);
-                DecisionManager.Instance.SetDecision(decisionKey, false);
-                DecisionManager.Instance.HandlePosterBarriers(decisionKey);
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (playerInZone && Input.GetKeyDown(KeyCode.O) && !hasTornDown)
-        {
-            hasTornDown = true;
-
-            if (posterObject != null)
-                posterObject.SetActive(false);
-
-            DecisionManager.Instance.SetDecision(decisionKey, true);
-            DecisionManager.Instance.HandlePosterBarriers(decisionKey);
-
-            Debug.Log("Poster abgerissen: " + decisionKey);
+            posterInteractable.SetPlayerInZone(false);
+            Debug.Log("Player hat die Poster-Zone verlassen: " + posterInteractable.decisionKey);
         }
     }
 }
