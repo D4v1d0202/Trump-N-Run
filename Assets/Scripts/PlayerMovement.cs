@@ -24,21 +24,27 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
-
-    [Header("Audio")] // Audio
+    
+    // Audio
+    [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip[] footstepClips;
-    public AudioClip landingClip;
+    public AudioClip[] landingClips;
+    public AudioClip[] climbingClips;
 
+    public float climbingVolume = 0.5f;
+    [Range(0f, 1f)]
     public float stepInterval = 0.5f;
     [Range(0f, 1f)]
     public float footstepVolume = 0.7f;
     [Range(0f, 1f)]
     public float landingVolume = 0.2f;
+
+    public float climbingInterval = 0.5f;
+    private float climbingTimer = 0f;
     private float stepTimer = 0f;
-
     private bool wasGroundedLastFrame = false;
-
+    //
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround; //ALWAYS ADD WHATISGROUND LAYER TO PLATFORMS WHERE JUMPING SHOULD BE ENABLED
@@ -77,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
-        // for Landing Sound 
+        // for Landing Sounds 
         if (!wasGroundedLastFrame && grounded)
         {
             PlayLandingSound();
@@ -106,11 +112,33 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             stepTimer = 0f;
-        } //
+        }
+        // climbing sounds
+        if (IsTouchingWall() && Input.GetKey("space"))
+        {
+            climbingTimer += Time.deltaTime;
+            if (climbingTimer >= climbingInterval)
+            {
+                PlayClimbingSound();
+                climbingTimer = 0f;
+            }
+        }
+        else
+        {
+            climbingTimer = 0f; // 
+        }
+
 
     }
 
-    // Sound
+    // Sound methods
+    private void PlayClimbingSound()
+    {
+        if (climbingClips.Length == 0 || audioSource == null) return;
+        int index = Random.Range(0, climbingClips.Length);
+        audioSource.PlayOneShot(climbingClips[index], climbingVolume);
+    }
+
     private void PlayRandomFootstep()
     {
         if (footstepClips.Length == 0 || audioSource == null) return;
@@ -120,11 +148,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayLandingSound()
     {
-        if (landingClip != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(landingClip, landingVolume);
-        }
-    } 
+        if (landingClips.Length == 0 || audioSource == null) return;
+        int index = Random.Range(0, landingClips.Length);
+        audioSource.PlayOneShot(landingClips[index], landingVolume);
+    }
 
     private void FixedUpdate()
     {
