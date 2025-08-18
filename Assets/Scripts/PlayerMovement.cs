@@ -156,6 +156,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+
+        Vector3 bodyEuler = rb.transform.eulerAngles;
+    bodyEuler.y = orientation.eulerAngles.y;
+    rb.MoveRotation(Quaternion.Euler(bodyEuler));
     }
 
     private void MyInput()
@@ -190,6 +194,16 @@ public class PlayerMovement : MonoBehaviour
         //in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 15f * airMultiplier, ForceMode.Force);
+
+       /* // rotate player towards movement direction (if moving)
+        Vector3 flatDirection = new Vector3(moveDirection.x, 0f, moveDirection.z);
+        if (flatDirection.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }*/
+
+    
     }
 
     private void SpeedControl()
