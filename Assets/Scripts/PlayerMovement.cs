@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public Animator animator; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -128,7 +130,8 @@ public class PlayerMovement : MonoBehaviour
             climbingTimer = 0f; // 
         }
 
-
+    bool isWalking = grounded && new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f;
+    animator.SetBool("isWalking", isWalking);
     }
 
     // Sound methods
