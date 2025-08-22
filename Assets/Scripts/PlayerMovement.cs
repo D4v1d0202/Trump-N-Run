@@ -130,8 +130,11 @@ public class PlayerMovement : MonoBehaviour
             climbingTimer = 0f; // 
         }
 
-    bool isWalking = grounded && new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f;
-    animator.SetBool("isWalking", isWalking);
+        bool isWalking = grounded && new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f;
+        animator.SetBool("isWalking", isWalking);
+    
+        bool isClimbing = IsTouchingWall() && Input.GetKey("space") && rb.velocity.y > 0.05f;
+        animator.SetBool("isClimbing", isClimbing);
     }
 
     // Sound methods
