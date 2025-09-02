@@ -6,41 +6,46 @@ public class SaluteZone : MonoBehaviour
 {
     private bool playerInZone = false;
     private bool hasSaluted = false;
+    public GameObject saluteCanvas;
+
+    void Start()
+    {
+        if (saluteCanvas != null)
+            saluteCanvas.SetActive(false);
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.name == "Player")
         {
             playerInZone = true;
             hasSaluted = false;
+
+            if (saluteCanvas != null)
+                saluteCanvas.SetActive(true);
+
             Debug.Log("Player ist in der Salutier-Zone");
         }
     }
 
     void OnTriggerExit(Collider other)
-{
-    if (other.CompareTag("Player"))
     {
-        if (!hasSaluted)
+        if (other.gameObject.name == "Player")
         {
-            DecisionManager.Instance.SetDecision("Saluted", false);
-            Debug.Log("Player hat NICHT salutiert!");
+            playerInZone = false;
         }
-
-        DecisionManager.Instance.HandleSaluteBarriers();
-        playerInZone = false;
     }
-}
 
-void Update()
-{
-    if (playerInZone && Input.GetKeyDown(KeyCode.P))
+    void Update()
     {
-        hasSaluted = true;
-        DecisionManager.Instance.SetDecision("Saluted", true);
-        Debug.Log("Player hat salutiert!");
+        if (playerInZone && Input.GetKeyDown(KeyCode.P))
+        {
+            hasSaluted = true;
 
-        DecisionManager.Instance.HandleSaluteBarriers();
+            if (saluteCanvas != null)
+                saluteCanvas.SetActive(false);
+
+            Debug.Log("Player hat salutiert!");
+        }
     }
-}
 }
