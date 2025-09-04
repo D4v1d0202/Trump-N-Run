@@ -8,7 +8,7 @@ public class DecisionManager : MonoBehaviour
 
     private Dictionary<string, bool> decisions = new Dictionary<string, bool>();
 
-    [Header("Optional: Barrieren für Salute-Entscheidung")]
+    [Header("Barrieren für Salute-Entscheidung")]
     public GameObject leftBlocker;
     public GameObject rightBlocker;
 
@@ -30,7 +30,6 @@ public class DecisionManager : MonoBehaviour
 
     void Start()
     {
-        // Initiale Barrierensteuerung (nur wenn Objekte zugewiesen sind)
         HandleSaluteBarriers();
     }
 
@@ -60,7 +59,7 @@ public class DecisionManager : MonoBehaviour
         }
 
         leftBlocker.SetActive(false);  // sicherheitshalber aus
-        rightBlocker.SetActive(false); // sicherheitshalber aus
+        rightBlocker.SetActive(false);
 
         if (GetDecision("Saluted"))
         {
@@ -92,12 +91,12 @@ public void HandlePosterBarriers(string decisionKey)
         if (toreDown)
         {
             leftPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Left) abgerissen → rechter Weg offen");
+            Debug.Log("Poster (Left) abgerissen, rechter Weg offen");
         }
         else
         {
             rightPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Left) NICHT abgerissen → rechter Weg zu");
+            Debug.Log("Poster (Left) NICHT abgerissen, rechter Weg zu");
         }
     }
     else if (decisionKey.Contains("Right"))
@@ -105,12 +104,12 @@ public void HandlePosterBarriers(string decisionKey)
         if (toreDown)
         {
             rightPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Right) abgerissen → linker Weg offen");
+            Debug.Log("Poster (Right) abgerissen, linker Weg offen");
         }
         else
         {
             leftPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Right) NICHT abgerissen → linker Weg zu");
+            Debug.Log("Poster (Right) NICHT abgerissen, linker Weg zu");
         }
     }
 }

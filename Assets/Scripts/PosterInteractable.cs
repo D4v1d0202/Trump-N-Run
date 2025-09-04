@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PosterInteractable : MonoBehaviour
 {
-    public string decisionKey = "ToreDownPoster_Left"; // Im Inspector setzen!
+    public string decisionKey = "ToreDownPoster_Left";
     private bool playerInZone = false;
     private bool hasTornDown = false;
 
