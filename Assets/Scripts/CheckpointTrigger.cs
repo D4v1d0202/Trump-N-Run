@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-    public int checkpointIndex = 10; // sollte höher sein als die positionsbasierten (1–3)
+    public int checkpointIndex = 10;
     public Transform checkpointLocation;
 
     private void OnTriggerEnter(Collider other)
