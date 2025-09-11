@@ -31887,63 +31887,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
   m_PrefabInstance: {fileID: 836719180}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &836906965
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -53.995266
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.7933025
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 23.99
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: e3802e12916894670a8109a9da705c49, type: 3}
-      propertyPath: m_Name
-      value: HoloSign
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e3802e12916894670a8109a9da705c49, type: 3}
 --- !u!1001 &837987966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80535,7 +80478,7 @@ Transform:
   m_GameObject: {fileID: 2112468225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -220.6, y: 15.7, z: 36.5}
+  m_LocalPosition: {x: -13.6, y: 2.4, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -82182,6 +82125,5 @@ SceneRoots:
   - {fileID: 2086113013}
   - {fileID: 412310924}
   - {fileID: 115493485}
-  - {fileID: 836906965}
   - {fileID: 693226737}
   - {fileID: 1424572629}
