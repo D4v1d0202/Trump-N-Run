@@ -113,4 +113,32 @@ public void HandlePosterBarriers(string decisionKey)
         }
     }
 }
+
+public void HandlePoster1Barriers(bool saluted)
+{
+    if (leftPosterBlocker == null || rightPosterBlocker == null)
+    {
+        Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
+        return;
+    }
+
+    // Beide Blocker erstmal deaktivieren
+    leftPosterBlocker.SetActive(false);
+    rightPosterBlocker.SetActive(false);
+
+    if (saluted)
+    {
+        // Rechte Blockade offen, linke zu
+        leftPosterBlocker.SetActive(true);
+        rightPosterBlocker.SetActive(false);
+        Debug.Log("Salutiert vor Poster 1: Linke Blockade zu, rechte offen");
+    }
+    else
+    {
+        // Rechte Blockade zu, linke offen
+        leftPosterBlocker.SetActive(false);
+        rightPosterBlocker.SetActive(true);
+        Debug.Log("Nicht salutiert vor Poster 1: Linke offen, rechte zu");
+    }
+}
 }
