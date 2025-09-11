@@ -38,13 +38,10 @@ public class SaluteZone : MonoBehaviour
 
     void Update()
     {
-        if (playerInZone && Input.GetKeyDown(KeyCode.P))
+        if (saluteCanvas != null && saluteCanvas.activeSelf && Input.GetKeyDown(KeyCode.P))
         {
             hasSaluted = true;
-
-            if (saluteCanvas != null)
-                saluteCanvas.SetActive(false);
-
+            saluteCanvas.SetActive(false);
             Debug.Log("Player hat salutiert!");
         }
     }
