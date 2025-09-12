@@ -2,6 +2,15 @@ using UnityEngine;
 
 public class Poster2Zone : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip tearStartClip;
+    public AudioClip tearFollowClip;
+    public AudioClip keepClip; 
+    [Range(0f, 1f)] public float volume = 0.8f;
+    public float followDelay = 0f;    // optional
+
+
     private bool playerInZone = false;
     private bool hasInteracted = false;
     public GameObject posterCanvas; // Canvas mit Text
@@ -53,6 +62,10 @@ public class Poster2Zone : MonoBehaviour
             DecisionManager.Instance.HandlePoster2Barriers(true); // Rechte Blockade öffnen
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
+
+            // AUDIO bei zerreißen
+            if (audioSource != null)
+                StartCoroutine(PlaySequence(tearStartClip, tearFollowClip)); //
         }
         if (playerInZone && !hasInteracted && Input.GetKeyDown(KeyCode.E))
         {
@@ -62,6 +75,24 @@ public class Poster2Zone : MonoBehaviour
             DecisionManager.Instance.HandlePoster2Barriers(false); // Linke Blockade öffnen
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
+
+            // AUDIO heile lassen
+            if (audioSource != null && keepClip != null)
+                audioSource.PlayOneShot(keepClip, volume); //
         }
+    }
+    // Coroutine für AUDIO; da zwei Clips direkt hinterinander
+    private System.Collections.IEnumerator PlaySequence(AudioClip first, AudioClip second)
+    {
+        if (audioSource == null) yield break;
+
+        if (first != null)
+        {
+            audioSource.PlayOneShot(first, volume);
+            yield return new WaitForSeconds(first.length + followDelay); // Warten bis der erste fertig ist
+        }
+
+        if (second != null)
+            audioSource.PlayOneShot(second, volume);
     }
 }

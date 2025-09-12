@@ -25,6 +25,8 @@ public class SpeechTrigger : MonoBehaviour
 
             if (blockade != null) blockade.SetActive(true);
 
+            DarkAmbientMusicController.Instance?.StopWithFade();
+
             speechSource.Play();
 
             StartCoroutine(RemoveBlockadeWhenSpeechEnds());

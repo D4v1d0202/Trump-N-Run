@@ -25,11 +25,19 @@ public class BackgroundMusicTrigger : MonoBehaviour
 
     public void StartMusic()
     {
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        if (!musicSource.isPlaying) musicSource.Play();
+        // Dark1 ausblenden, sobald BackgroundMusicTrigger aktiv
+        DarkAmbientMusicController.Instance?.StopWithFade();
+
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+
+        if (!musicSource.isPlaying)
+            musicSource.Play();
+
         fadeCoroutine = StartCoroutine(FadeTo(initialVolume));
         isPlaying = true;
     }
+
 
     public void StopWithFade()
     {

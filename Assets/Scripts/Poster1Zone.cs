@@ -4,8 +4,15 @@ public class Poster1Zone : MonoBehaviour
 {
     private bool playerInZone = false;
     private bool hasSaluted = false;
+
+    [Header("UI")]
     public GameObject posterCanvas; // Canvas mit Text
     public TMPro.TextMeshProUGUI infoText; // UI-Text für die Meldung
+
+    [Header("Audio")]
+    public AudioSource audioSource;   
+    public AudioClip saluteClip;      // Sound salutieren
+    public AudioClip refuseClip;      // Sound ablehnen
 
     void OnTriggerEnter(Collider other)
     {
@@ -39,12 +46,20 @@ public class Poster1Zone : MonoBehaviour
             DecisionManager.Instance.HandlePoster1Barriers(true);
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
+
+            // SOUND ABSPIELEN SALUTIEREN
+            if (audioSource != null && saluteClip != null)
+                audioSource.PlayOneShot(saluteClip); //
         }
         if (playerInZone && !hasSaluted && Input.GetKeyDown(KeyCode.E))
         {
             DecisionManager.Instance.HandlePoster1Barriers(false);
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
+
+            // SOUND ABLEHNUNG
+            if (audioSource != null && refuseClip != null)
+                audioSource.PlayOneShot(refuseClip); //
         }
     void Start()
     {
