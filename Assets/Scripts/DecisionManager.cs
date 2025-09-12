@@ -14,6 +14,9 @@ public class DecisionManager : MonoBehaviour
 
     public GameObject leftPosterBlocker;
     public GameObject rightPosterBlocker;
+    [Header("Blockaden für Poster2")]
+    public GameObject leftPoster2Blocker;
+    public GameObject rightPoster2Blocker;
 
     private void Awake()
     {
@@ -73,72 +76,99 @@ public class DecisionManager : MonoBehaviour
         }
     }
 
-public void HandlePosterBarriers(string decisionKey)
-{
-    if (leftPosterBlocker == null || rightPosterBlocker == null)
+    public void HandlePosterBarriers(string decisionKey)
     {
-        Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
-        return;
-    }
-
-    leftPosterBlocker.SetActive(false);
-    rightPosterBlocker.SetActive(false);
-
-    bool toreDown = GetDecision(decisionKey);
-
-    if (decisionKey.Contains("Left"))
-    {
-        if (toreDown)
+        if (leftPosterBlocker == null || rightPosterBlocker == null)
         {
-            leftPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Left) abgerissen, rechter Weg offen");
+            Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
+            return;
         }
-        else
-        {
-            rightPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Left) NICHT abgerissen, rechter Weg zu");
-        }
-    }
-    else if (decisionKey.Contains("Right"))
-    {
-        if (toreDown)
-        {
-            rightPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Right) abgerissen, linker Weg offen");
-        }
-        else
-        {
-            leftPosterBlocker.SetActive(true);
-            Debug.Log("Poster (Right) NICHT abgerissen, linker Weg zu");
-        }
-    }
-}
 
-public void HandlePoster1Barriers(bool saluted)
-{
-    if (leftPosterBlocker == null || rightPosterBlocker == null)
-    {
-        Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
-        return;
-    }
-
-    // Beide Blocker erstmal deaktivieren
-    leftPosterBlocker.SetActive(false);
-    rightPosterBlocker.SetActive(false);
-
-    if (saluted)
-    {
-        // Rechte Blockade offen, linke zu
-        leftPosterBlocker.SetActive(true);
-        rightPosterBlocker.SetActive(false);
-        Debug.Log("Salutiert vor Poster 1: Linke Blockade zu, rechte offen");
-    }
-    else
-    {
-        // Rechte Blockade zu, linke offen
         leftPosterBlocker.SetActive(false);
-        rightPosterBlocker.SetActive(true);
-        Debug.Log("Nicht salutiert vor Poster 1: Linke offen, rechte zu");
+        rightPosterBlocker.SetActive(false);
+
+        bool toreDown = GetDecision(decisionKey);
+
+        if (decisionKey.Contains("Left"))
+        {
+            if (toreDown)
+            {
+                leftPosterBlocker.SetActive(true);
+                Debug.Log("Poster (Left) abgerissen, rechter Weg offen");
+            }
+            else
+            {
+                rightPosterBlocker.SetActive(true);
+                Debug.Log("Poster (Left) NICHT abgerissen, rechter Weg zu");
+            }
+        }
+        else if (decisionKey.Contains("Right"))
+        {
+            if (toreDown)
+            {
+                rightPosterBlocker.SetActive(true);
+                Debug.Log("Poster (Right) abgerissen, linker Weg offen");
+            }
+            else
+            {
+                leftPosterBlocker.SetActive(true);
+                Debug.Log("Poster (Right) NICHT abgerissen, linker Weg zu");
+            }
+        }
     }
-}
+
+    public void HandlePoster1Barriers(bool saluted)
+    {
+        if (leftPosterBlocker == null || rightPosterBlocker == null)
+        {
+            Debug.LogWarning("Poster-Blocker nicht zugewiesen!");
+            return;
+        }
+
+        // Beide Blocker erstmal deaktivieren
+        leftPosterBlocker.SetActive(false);
+        rightPosterBlocker.SetActive(false);
+
+        if (saluted)
+        {
+            // Rechte Blockade offen, linke zu
+            leftPosterBlocker.SetActive(true);
+            rightPosterBlocker.SetActive(false);
+            Debug.Log("Salutiert vor Poster 1: Linke Blockade zu, rechte offen");
+        }
+        else
+        {
+            // Rechte Blockade zu, linke offen
+            leftPosterBlocker.SetActive(false);
+            rightPosterBlocker.SetActive(true);
+            Debug.Log("Nicht salutiert vor Poster 1: Linke offen, rechte zu");
+        }
+    }
+
+    public void HandlePoster2Barriers(bool torn)
+    {
+        if (leftPoster2Blocker == null || rightPoster2Blocker == null)
+        {
+            Debug.LogWarning("Poster2-Blocker nicht zugewiesen!");
+            return;
+        }
+
+        leftPoster2Blocker.SetActive(false);
+        rightPoster2Blocker.SetActive(false);
+
+        if (torn)
+        {
+            // Rechte Blockade öffnen, linke zu
+            leftPoster2Blocker.SetActive(true);
+            rightPoster2Blocker.SetActive(false);
+            Debug.Log("Poster2 zerrissen: Linke Blockade zu, rechte offen");
+        }
+        else
+        {
+            // Linke Blockade öffnen, rechte zu
+            leftPoster2Blocker.SetActive(false);
+            rightPoster2Blocker.SetActive(true);
+            Debug.Log("Poster2 nicht zerrissen: Linke offen, rechte zu");
+        }
+    }
 }
