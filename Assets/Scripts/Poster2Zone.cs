@@ -13,6 +13,7 @@ public class Poster2Zone : MonoBehaviour
 
     private bool playerInZone = false;
     private bool hasInteracted = false;
+    private bool decisionMade = false;
     public GameObject posterCanvas; // Canvas mit Text
     public TMPro.TextMeshProUGUI infoText; // UI-Text für die Meldung
     public GameObject poster2; // Das ursprüngliche Poster
@@ -34,7 +35,7 @@ public class Poster2Zone : MonoBehaviour
         {
             playerInZone = true;
             hasInteracted = false;
-            if (posterCanvas != null && infoText != null)
+            if (!decisionMade && posterCanvas != null && infoText != null)
             {
                 posterCanvas.SetActive(true);
                 infoText.text = "Klicke mit der linken Maustaste, um das Poster zu zerreißen oder drücke E, um es zu heile zu lassen.";
@@ -54,9 +55,10 @@ public class Poster2Zone : MonoBehaviour
 
     void Update()
     {
-        if (playerInZone && !hasInteracted && Input.GetMouseButtonDown(0)) // Linksklick
+        if (playerInZone && !decisionMade && !hasInteracted && Input.GetMouseButtonDown(0)) // Linksklick
         {
             hasInteracted = true;
+            decisionMade = true;
             if (poster2 != null) poster2.SetActive(false);
             if (poster2Torn != null) poster2Torn.SetActive(true);
             DecisionManager.Instance.HandlePoster2Barriers(true); // Rechte Blockade öffnen
@@ -67,9 +69,10 @@ public class Poster2Zone : MonoBehaviour
             if (audioSource != null)
                 StartCoroutine(PlaySequence(tearStartClip, tearFollowClip)); //
         }
-        if (playerInZone && !hasInteracted && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && !decisionMade && !hasInteracted && Input.GetKeyDown(KeyCode.E))
         {
             hasInteracted = true;
+            decisionMade = true;
             if (poster2 != null) poster2.SetActive(true);
             if (poster2Torn != null) poster2Torn.SetActive(false);
             DecisionManager.Instance.HandlePoster2Barriers(false); // Linke Blockade öffnen

@@ -131,17 +131,17 @@ public class DecisionManager : MonoBehaviour
 
         if (saluted)
         {
-            // Rechte Blockade offen, linke zu
+            // Linke Blockade offen, rechte zu
             leftPosterBlocker.SetActive(true);
             rightPosterBlocker.SetActive(false);
-            Debug.Log("Salutiert vor Poster 1: Linke Blockade zu, rechte offen");
+            Debug.Log("Salutiert vor Poster 1: Linke offen, rechte zu");
         }
         else
         {
-            // Rechte Blockade zu, linke offen
+            // Rechte Blockade offen, linke zu
             leftPosterBlocker.SetActive(false);
             rightPosterBlocker.SetActive(true);
-            Debug.Log("Nicht salutiert vor Poster 1: Linke offen, rechte zu");
+            Debug.Log("Nicht salutiert vor Poster 1: Linke zu, rechte offen");
         }
     }
 
@@ -158,17 +158,17 @@ public class DecisionManager : MonoBehaviour
 
         if (torn)
         {
-            // Rechte Blockade öffnen, linke zu
-            leftPoster2Blocker.SetActive(true);
-            rightPoster2Blocker.SetActive(false);
-            Debug.Log("Poster2 zerrissen: Linke Blockade zu, rechte offen");
+            // Rechte Blockade zu, linke offen
+            leftPoster2Blocker.SetActive(false);
+            rightPoster2Blocker.SetActive(true);
+            Debug.Log("Poster2 zerrissen: Linke offen, rechte zu");
         }
         else
         {
-            // Linke Blockade öffnen, rechte zu
-            leftPoster2Blocker.SetActive(false);
-            rightPoster2Blocker.SetActive(true);
-            Debug.Log("Poster2 nicht zerrissen: Linke offen, rechte zu");
+            // Linke Blockade zu, rechte offen
+            leftPoster2Blocker.SetActive(true);
+            rightPoster2Blocker.SetActive(false);
+            Debug.Log("Poster2 nicht zerrissen: Linke zu, rechte offen");
         }
     }
 }

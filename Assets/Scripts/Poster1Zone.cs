@@ -4,6 +4,7 @@ public class Poster1Zone : MonoBehaviour
 {
     private bool playerInZone = false;
     private bool hasSaluted = false;
+    private bool decisionMade = false;
 
     [Header("UI")]
     public GameObject posterCanvas; // Canvas mit Text
@@ -20,7 +21,7 @@ public class Poster1Zone : MonoBehaviour
         {
             playerInZone = true;
             hasSaluted = false;
-            if (posterCanvas != null && infoText != null)
+            if (!decisionMade && posterCanvas != null && infoText != null)
             {
                 posterCanvas.SetActive(true);
                 infoText.text = "Drücke P zum Salutieren oder E, wenn du es nicht tun willst. Wähle so deinen Weg";
@@ -40,9 +41,10 @@ public class Poster1Zone : MonoBehaviour
 
     void Update()
     {
-        if (playerInZone && Input.GetKeyDown(KeyCode.P))
+        if (playerInZone && !decisionMade && Input.GetKeyDown(KeyCode.P))
         {
             hasSaluted = true;
+            decisionMade = true;
             DecisionManager.Instance.HandlePoster1Barriers(true);
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
@@ -51,8 +53,9 @@ public class Poster1Zone : MonoBehaviour
             if (audioSource != null && saluteClip != null)
                 audioSource.PlayOneShot(saluteClip); //
         }
-        if (playerInZone && !hasSaluted && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && !decisionMade && !hasSaluted && Input.GetKeyDown(KeyCode.E))
         {
+            decisionMade = true;
             DecisionManager.Instance.HandlePoster1Barriers(false);
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
