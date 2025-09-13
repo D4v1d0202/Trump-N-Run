@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BookManager : MonoBehaviour
 {
@@ -12,6 +13,25 @@ public class BookManager : MonoBehaviour
     private bool isPlayerNearBook = false;
     private bool bookTaken = false;
     private MeshRenderer bookRenderer;
+
+    // AUDIO
+    [Header("Audio")]
+    public AudioSource audioSource;
+    [Range(0f, 1f)] public float volume = 0.8f;
+
+    [Header("Audio beim Aufheben (Taste G)")]
+    public AudioClip pickUpClip;
+
+    [Header("Audio beim Ablegen (Taste 1)")]
+    public AudioClip placeStartClip;    // Buch
+    public AudioClip placeVoiceClip;    // Voice
+    public float placeFollowDelay = 0f;
+
+    [Header("Audio beim Wegwerfen (Taste 2)")]
+    public AudioClip trashStartClip;    // Buch
+    public AudioClip trashVoiceClip;    // Voice
+    public float trashFollowDelay = 0f;
+    // 
 
     void Start()
     {
@@ -33,6 +53,12 @@ public class BookManager : MonoBehaviour
             }
             bookTaken = true;
             Debug.Log("Buch eingesammelt!");
+
+            // AUDIO einsammeln
+            if (audioSource != null && pickUpClip != null)
+            {
+                audioSource.PlayOneShot(pickUpClip, volume);
+            }
         }
 
         // Buch an Position 1 oder 2 erscheinen lassen
@@ -47,6 +73,10 @@ public class BookManager : MonoBehaviour
                 }
                 bookTaken = false;
                 Debug.Log("Buch an Position 1 platziert!");
+
+                // AUDIO Position 1
+                if (audioSource != null)
+                    StartCoroutine(PlaySequence(placeStartClip, placeVoiceClip, placeFollowDelay));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -57,6 +87,10 @@ public class BookManager : MonoBehaviour
                 }
                 bookTaken = false;
                 Debug.Log("Buch an Position 2 platziert!");
+
+                // AUDIO Position 2
+                if (audioSource != null)
+                    StartCoroutine(PlaySequence(trashStartClip, trashVoiceClip, trashFollowDelay));
             }
         }
     }
@@ -77,4 +111,22 @@ public class BookManager : MonoBehaviour
             isPlayerNearBook = false;
         }
     }
+
+    // Coroutine zum sicheren apbsielen
+    private IEnumerator PlaySequence(AudioClip first, AudioClip second, float extraDelay)
+    {
+        if (audioSource == null) yield break;
+
+        if (first != null)
+        {
+            audioSource.PlayOneShot(first, volume);
+            yield return new WaitForSeconds((first.length > 0f ? first.length : 0f) + Mathf.Max(0f, extraDelay));
+        }
+
+        if (second != null)
+        {
+            audioSource.PlayOneShot(second, volume);
+        }
+    }
+
 }
