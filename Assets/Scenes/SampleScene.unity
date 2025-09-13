@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1875,6 +1875,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+--- !u!1 &27388306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+  m_PrefabInstance: {fileID: 1907402405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &27388310
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27388306}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
 --- !u!1001 &29627788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5509,7 +5536,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game info: Press ''P'' to salute to BIG BROTHER.'
+  m_text: "Dr\xFCcke P zum Salutieren oder E, wenn du es nicht tun willst. W\xE4hle
+    so deinen Weg."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5531,7 +5559,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 93368250
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -16810,7 +16838,7 @@ RectTransform:
   m_GameObject: {fileID: 349946904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.43, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.91, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1621807911}
@@ -16818,7 +16846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -204}
+  m_AnchoredPosition: {x: 0, y: -8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &349946906
@@ -22958,8 +22986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f044eed094fd24e19a3cef2539b8675e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posterCanvas: {fileID: 1421397446}
-  infoText: {fileID: 458258291}
+  posterCanvas: {fileID: 619030414}
   audioSource: {fileID: 467463487}
   saluteClip: {fileID: 8300000, guid: 9ba1c47d65a7c534980efe1d73e2a4eb, type: 3}
   refuseClip: {fileID: 8300000, guid: 5b482445532eca8408e4813d171bab42, type: 3}
@@ -29314,8 +29341,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619030414}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -513.9827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29324,7 +29351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 737.01245, y: 54.09239}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &619030416
@@ -32718,6 +32745,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+--- !u!1 &675460577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+  m_PrefabInstance: {fileID: 1907402405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &675460581
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675460577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
 --- !u!1001 &679824611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33205,12 +33259,12 @@ GameObject:
   - component: {fileID: 699788904}
   - component: {fileID: 699788903}
   m_Layer: 10
-  m_Name: SaluteTrigger
+  m_Name: SaluteTrigger (not used anymore)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &699788902
 Transform:
   m_ObjectHideFlags: 0
@@ -67824,12 +67878,12 @@ GameObject:
   - component: {fileID: 1421397449}
   - component: {fileID: 1421397448}
   m_Layer: 0
-  m_Name: Canvas Poster1
+  m_Name: Canvas Poster1 (not used anymore)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1421397447
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76925,16 +76979,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621807910}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.47252744, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 349946905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -215.38457}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1621807912
@@ -76957,7 +77011,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hallo. Hier ist dein Auftrag.
+  m_text: "Du bist sp\xE4t dran. Die Rede l\xE4uft bereits. Es darf keinen Zwischenfall
+    geben \u2013 nicht heute.\nDie Krone... sie ist noch nicht \xFCbergeben worden.
+    Der Oberbefehl erwartet sie jetzt. Ohne\nsie wird die Kr\xF6nung nicht stattfinden.
+    Ohne Kr\xF6nung keine Stabilit\xE4t. Und du wei\xDFt, was\ndann passiert. Wir
+    haben sie sicher verwahrt \u2013 Sicherheitszone 4. Gesichert, streng\nbewacht.
+    Du kennst die Protokolle. Du wei\xDFt, wie du durchkommst. Mach keine Fehler.\nKeine
+    Fragen. Nur liefern. Und falls du Zweifel hast: Denk an die Konsequenzen. Nicht
+    nur\nf\xFCr dich. F\xFCr uns alle."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -76979,13 +77040,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 93368250
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 112.7
-  m_fontSizeBase: 112.7
+  m_fontSize: 81.84
+  m_fontSizeBase: 81.84
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -77020,7 +77081,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -720.2346, y: -406.71115, z: -736.4045, w: -422.0704}
+  m_margin: {x: -785.142, y: -1438.337, z: -763.56616, w: -565.8215}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -90243,7 +90304,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 321453329}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 675460581}
+    - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 27388310}
   m_SourcePrefab: {fileID: 100100000, guid: ddc130cc932bd8745b18c323a1bdbe13, type: 3}
 --- !u!4 &1907402406 stripped
 Transform:
@@ -98796,8 +98863,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101923453}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -513.9827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -98806,7 +98873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 737.01245, y: 54.09239}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1001 &2102923710
@@ -98953,7 +99020,7 @@ Transform:
   m_GameObject: {fileID: 2112468225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -444.5, y: 13.88, z: -5.5}
+  m_LocalPosition: {x: -221.96, y: 10.52, z: 37.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

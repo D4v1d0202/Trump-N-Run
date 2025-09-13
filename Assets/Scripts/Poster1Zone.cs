@@ -7,13 +7,18 @@ public class Poster1Zone : MonoBehaviour
     private bool decisionMade = false;
 
     [Header("UI")]
-    public GameObject posterCanvas; // Canvas mit Text
-    public TMPro.TextMeshProUGUI infoText; // UI-Text für die Meldung
+    public GameObject posterCanvas; // Nur das Canvas
 
     [Header("Audio")]
     public AudioSource audioSource;   
     public AudioClip saluteClip;      // Sound salutieren
     public AudioClip refuseClip;      // Sound ablehnen
+
+    void Start()
+    {
+        if (posterCanvas != null)
+            posterCanvas.SetActive(false);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,10 +26,9 @@ public class Poster1Zone : MonoBehaviour
         {
             playerInZone = true;
             hasSaluted = false;
-            if (!decisionMade && posterCanvas != null && infoText != null)
+            if (!decisionMade && posterCanvas != null)
             {
                 posterCanvas.SetActive(true);
-                infoText.text = "Drücke P zum Salutieren oder E, wenn du es nicht tun willst. Wähle so deinen Weg";
             }
         }
     }
@@ -46,28 +50,26 @@ public class Poster1Zone : MonoBehaviour
             hasSaluted = true;
             decisionMade = true;
             DecisionManager.Instance.HandlePoster1Barriers(true);
+
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
 
             // SOUND ABSPIELEN SALUTIEREN
             if (audioSource != null && saluteClip != null)
-                audioSource.PlayOneShot(saluteClip); //
+                audioSource.PlayOneShot(saluteClip);
         }
+
         if (playerInZone && !decisionMade && !hasSaluted && Input.GetKeyDown(KeyCode.E))
         {
             decisionMade = true;
             DecisionManager.Instance.HandlePoster1Barriers(false);
+
             if (posterCanvas != null)
                 posterCanvas.SetActive(false);
 
             // SOUND ABLEHNUNG
             if (audioSource != null && refuseClip != null)
-                audioSource.PlayOneShot(refuseClip); //
+                audioSource.PlayOneShot(refuseClip);
         }
-    void Start()
-    {
-        if (posterCanvas != null)
-            posterCanvas.SetActive(false);
-    }
     }
 }
