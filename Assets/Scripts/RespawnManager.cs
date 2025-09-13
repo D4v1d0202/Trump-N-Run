@@ -39,16 +39,21 @@ public class RespawnManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-
-            player.position = currentRespawnPoint.position;
-            player.rotation = currentRespawnPoint.rotation;
+            RespawnPlayer();
         }
+    }
+
+    public void RespawnPlayer()
+    {
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        player.position = currentRespawnPoint.position;
+        player.rotation = currentRespawnPoint.rotation;
     }
 
     public void SetCheckpoint(Transform checkpointTransform, int checkpointIndex)
@@ -57,7 +62,14 @@ public class RespawnManager : MonoBehaviour
         {
             currentCheckpointIndex = checkpointIndex;
             currentRespawnPoint = checkpointTransform;
-
         }
     }
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Respawn Trigger"))
+        {
+            RespawnPlayer();
+        }
+    }*/
 }
