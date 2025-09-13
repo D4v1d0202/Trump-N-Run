@@ -12,7 +12,11 @@ public class BookManager : MonoBehaviour
 
     private bool isPlayerNearBook = false;
     private bool bookTaken = false;
+    private bool decisionMade = false; // <--- NEU
     private MeshRenderer bookRenderer;
+
+    [Header("UI")]
+    public GameObject bookCanvas; // Canvas zum Anzeigen
 
     // AUDIO
     [Header("Audio")]
@@ -40,67 +44,75 @@ public class BookManager : MonoBehaviour
         {
             Debug.LogError("Kein MeshRenderer am Buch-Objekt gefunden!");
         }
+
+        if (bookCanvas != null)
+            bookCanvas.SetActive(false);
     }
 
     void Update()
     {
         // Buch einsammeln
-        if (isPlayerNearBook && !bookTaken && Input.GetKeyDown(KeyCode.G))
+        if (isPlayerNearBook && !bookTaken && !decisionMade && Input.GetKeyDown(KeyCode.G))
         {
             if (bookRenderer != null)
-            {
                 bookRenderer.enabled = false;
-            }
+
             bookTaken = true;
             Debug.Log("Buch eingesammelt!");
 
-            // AUDIO einsammeln
+            if (bookCanvas != null)
+                bookCanvas.SetActive(false);
+
             if (audioSource != null && pickUpClip != null)
-            {
                 audioSource.PlayOneShot(pickUpClip, volume);
-            }
         }
 
         // Buch an Position 1 oder 2 erscheinen lassen
-        if (bookTaken)
+        if (bookTaken && !decisionMade)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                bookObject.transform.position = position1.position;
-                if (bookRenderer != null)
-                {
-                    bookRenderer.enabled = true;
-                }
-                bookTaken = false;
-                Debug.Log("Buch an Position 1 platziert!");
+                PlaceBook(position1);
+                decisionMade = true;
 
-                // AUDIO Position 1
                 if (audioSource != null)
                     StartCoroutine(PlaySequence(placeStartClip, placeVoiceClip, placeFollowDelay));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                bookObject.transform.position = position2.position;
-                if (bookRenderer != null)
-                {
-                    bookRenderer.enabled = true;
-                }
-                bookTaken = false;
-                Debug.Log("Buch an Position 2 platziert!");
+                PlaceBook(position2);
+                decisionMade = true;
 
-                // AUDIO Position 2
                 if (audioSource != null)
                     StartCoroutine(PlaySequence(trashStartClip, trashVoiceClip, trashFollowDelay));
             }
+
         }
     }
 
-    // Trigger-Events für die Nähe zum Buch
+    private void PlaceBook(Transform targetTransform)
+    {
+        bookObject.transform.SetPositionAndRotation(targetTransform.position, targetTransform.rotation);
+
+        if (bookRenderer != null)
+            bookRenderer.enabled = true;
+
+        bookTaken = false;
+        Debug.Log("Buch platziert!");
+
+        if (bookCanvas != null)
+            bookCanvas.SetActive(false); // sicherstellen, dass es aus bleibt
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNearBook = true;
+
+            if (!bookTaken && !decisionMade && bookCanvas != null)
+                bookCanvas.SetActive(true);
         }
     }
 
@@ -109,10 +121,12 @@ public class BookManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearBook = false;
+
+            if (bookCanvas != null)
+                bookCanvas.SetActive(false);
         }
     }
 
-    // Coroutine zum sicheren apbsielen
     private IEnumerator PlaySequence(AudioClip first, AudioClip second, float extraDelay)
     {
         if (audioSource == null) yield break;
@@ -124,9 +138,6 @@ public class BookManager : MonoBehaviour
         }
 
         if (second != null)
-        {
             audioSource.PlayOneShot(second, volume);
-        }
     }
-
 }

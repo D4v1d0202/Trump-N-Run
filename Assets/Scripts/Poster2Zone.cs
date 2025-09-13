@@ -10,14 +10,16 @@ public class Poster2Zone : MonoBehaviour
     [Range(0f, 1f)] public float volume = 0.8f;
     public float followDelay = 0f;    // optional
 
+    [Header("UI")]
+    public GameObject posterCanvas; // Nur das Canvas (kein Text mehr)
+
+    [Header("Poster Variants")]
+    public GameObject poster2;      // Das ursprüngliche Poster
+    public GameObject poster2Torn;  // Das zerrissene Poster
 
     private bool playerInZone = false;
     private bool hasInteracted = false;
     private bool decisionMade = false;
-    public GameObject posterCanvas; // Canvas mit Text
-    public TMPro.TextMeshProUGUI infoText; // UI-Text für die Meldung
-    public GameObject poster2; // Das ursprüngliche Poster
-    public GameObject poster2Torn; // Das zerrissene Poster
 
     void Start()
     {
@@ -35,10 +37,9 @@ public class Poster2Zone : MonoBehaviour
         {
             playerInZone = true;
             hasInteracted = false;
-            if (!decisionMade && posterCanvas != null && infoText != null)
+            if (!decisionMade && posterCanvas != null)
             {
                 posterCanvas.SetActive(true);
-                infoText.text = "Klicke mit der linken Maustaste, um das Poster zu zerreißen oder drücke E, um es zu heile zu lassen.";
             }
         }
     }
@@ -67,8 +68,9 @@ public class Poster2Zone : MonoBehaviour
 
             // AUDIO bei zerreißen
             if (audioSource != null)
-                StartCoroutine(PlaySequence(tearStartClip, tearFollowClip)); //
+                StartCoroutine(PlaySequence(tearStartClip, tearFollowClip));
         }
+
         if (playerInZone && !decisionMade && !hasInteracted && Input.GetKeyDown(KeyCode.E))
         {
             hasInteracted = true;
@@ -81,10 +83,11 @@ public class Poster2Zone : MonoBehaviour
 
             // AUDIO heile lassen
             if (audioSource != null && keepClip != null)
-                audioSource.PlayOneShot(keepClip, volume); //
+                audioSource.PlayOneShot(keepClip, volume);
         }
     }
-    // Coroutine für AUDIO; da zwei Clips direkt hinterinander
+
+    // Coroutine für AUDIO; da zwei Clips direkt hintereinander
     private System.Collections.IEnumerator PlaySequence(AudioClip first, AudioClip second)
     {
         if (audioSource == null) yield break;
@@ -92,7 +95,7 @@ public class Poster2Zone : MonoBehaviour
         if (first != null)
         {
             audioSource.PlayOneShot(first, volume);
-            yield return new WaitForSeconds(first.length + followDelay); // Warten bis der erste fertig ist
+            yield return new WaitForSeconds(first.length + followDelay);
         }
 
         if (second != null)

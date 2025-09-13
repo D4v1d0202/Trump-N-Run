@@ -5,7 +5,6 @@ using UnityEngine;
 public class PosterZone : MonoBehaviour
 {
     public PosterInteractable posterInteractable;
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
