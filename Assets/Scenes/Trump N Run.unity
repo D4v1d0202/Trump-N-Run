@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8957,9 +8957,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -16120,9 +16120,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 264173015}
-    - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 264173020}
   m_SourcePrefab: {fileID: 100100000, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
 --- !u!4 &264173013 stripped
 Transform:
@@ -16246,25 +16243,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   cameraTarget: {fileID: 1775060691}
   audioSource: {fileID: 264173015}
-  bombClip: {fileID: 8300000, guid: e899469f41b0f4d48a5ecdeaf804d3ce, type: 3}
-  volume: 1
---- !u!114 &264173020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264173014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de71dd6d8e72d4cd69d31f948defc535, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2112468225}
-  mainCamera: {fileID: 963194227}
-  cameraTarget: {fileID: 1775060691}
-  audioSource: {fileID: 264173015}
-  noBombClip: {fileID: 8300000, guid: a74c5fec1b47cf24aa64790031c6810b, type: 3}
+  bombClip: {fileID: 8300000, guid: a74c5fec1b47cf24aa64790031c6810b, type: 3}
   volume: 1
 --- !u!1001 &264693292
 PrefabInstance:
@@ -84542,10 +84521,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1490177582}
+      addedObject: {fileID: 1490177586}
     - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1490177586}
+      addedObject: {fileID: 1490177587}
   m_SourcePrefab: {fileID: 100100000, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
 --- !u!4 &1490177580 stripped
 Transform:
@@ -84557,24 +84536,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
   m_PrefabInstance: {fileID: 1490177579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1490177582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490177581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea1fb04e44144bcc846be1ccfc29bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2112468225}
-  mainCamera: {fileID: 963194227}
-  cameraTarget: {fileID: 1775060691}
-  audioSource: {fileID: 1490177586}
-  bombClip: {fileID: 8300000, guid: a74c5fec1b47cf24aa64790031c6810b, type: 3}
-  volume: 1
 --- !u!82 &1490177586
 AudioSource:
   m_ObjectHideFlags: 0
@@ -84671,6 +84632,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1490177587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490177581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de71dd6d8e72d4cd69d31f948defc535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2112468225}
+  mainCamera: {fileID: 963194227}
+  cameraTarget: {fileID: 1775060691}
+  audioSource: {fileID: 1490177586}
+  noBombClip: {fileID: 8300000, guid: e899469f41b0f4d48a5ecdeaf804d3ce, type: 3}
+  volume: 1
 --- !u!1001 &1490899688
 PrefabInstance:
   m_ObjectHideFlags: 0
