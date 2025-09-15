@@ -18,13 +18,15 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     private bool readyToJump = true;
 
+    private bool gotBomb = false;
+
     [SerializeField] private ClimbingWallTrigger[] climbingWallTrigger; //REMEMBER TO ALWAYS ADD NEW CLIMBING WALLS TO ARRAY
 
     public float climbingSpeed;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
-    
+
     // Audio
     [Header("Audio")]
     public AudioSource audioSource;
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-    public Animator animator; 
+    public Animator animator;
 
     void Start()
     {
@@ -132,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool isWalking = grounded && new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f;
         animator.SetBool("isWalking", isWalking);
-    
+
         bool isClimbing = IsTouchingWall() && Input.GetKey("space") && rb.velocity.y > 0.05f;
         animator.SetBool("isClimbing", isClimbing);
     }
@@ -164,8 +166,8 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
 
         Vector3 bodyEuler = rb.transform.eulerAngles;
-    bodyEuler.y = orientation.eulerAngles.y;
-    rb.MoveRotation(Quaternion.Euler(bodyEuler));
+        bodyEuler.y = orientation.eulerAngles.y;
+        rb.MoveRotation(Quaternion.Euler(bodyEuler));
     }
 
     private void MyInput()
@@ -201,15 +203,15 @@ public class PlayerMovement : MonoBehaviour
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 15f * airMultiplier, ForceMode.Force);
 
-       /* // rotate player towards movement direction (if moving)
-        Vector3 flatDirection = new Vector3(moveDirection.x, 0f, moveDirection.z);
-        if (flatDirection.magnitude > 0.1f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
-        }*/
+        /* // rotate player towards movement direction (if moving)
+         Vector3 flatDirection = new Vector3(moveDirection.x, 0f, moveDirection.z);
+         if (flatDirection.magnitude > 0.1f)
+         {
+             Quaternion targetRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
+             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+         }*/
 
-    
+
     }
 
     private void SpeedControl()
@@ -263,7 +265,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Climb()
-    { 
+    {
         rb.velocity = new Vector3(rb.velocity.x, climbingSpeed, rb.velocity.z);
+    }
+
+    public void SetGotBomb(bool gotBombOrNo)
+    {
+        gotBomb = gotBombOrNo;
+    }
+    
+    public bool GetGotBomb()
+    {
+        return gotBomb;
     }
 }

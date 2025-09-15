@@ -11,6 +11,7 @@ public class PlayerPickupTrigger : MonoBehaviour
     private Vector3 originalScale;
     private Rigidbody rb;
     private Collider[] allColliders;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
@@ -23,7 +24,13 @@ public class PlayerPickupTrigger : MonoBehaviour
     {
         if (isPickedUp) return;
         if (other.CompareTag(playerTag))
+        {
             PickUp();
+            if (gameObject.tag == "PickableBomb")
+            {
+                playerMovement.SetGotBomb(true);
+            }
+        }
     }
 
     void PickUp()
