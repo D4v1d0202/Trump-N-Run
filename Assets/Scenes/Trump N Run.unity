@@ -16116,10 +16116,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 264173016}
+      addedObject: {fileID: 264173015}
     - targetCorrespondingSourceObject: {fileID: 7817334106192387917, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 264173015}
+      addedObject: {fileID: 264173020}
   m_SourcePrefab: {fileID: 100100000, guid: 02764e0ab372a4c148e5ca17dc1dede6, type: 3}
 --- !u!4 &264173013 stripped
 Transform:
@@ -16227,7 +16227,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &264173016
+--- !u!114 &264173020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16236,14 +16236,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 264173014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea1fb04e44144bcc846be1ccfc29bb3, type: 3}
+  m_Script: {fileID: 11500000, guid: de71dd6d8e72d4cd69d31f948defc535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2112468225}
   mainCamera: {fileID: 963194227}
   cameraTarget: {fileID: 1775060691}
-  audioSource: {fileID: 264173015}
-  bombClip: {fileID: 8300000, guid: a74c5fec1b47cf24aa64790031c6810b, type: 3}
+  audioSource: {fileID: 1490177586}
+  noBombClip: {fileID: 8300000, guid: a74c5fec1b47cf24aa64790031c6810b, type: 3}
   volume: 1
 --- !u!1001 &264693292
 PrefabInstance:
@@ -117349,7 +117349,7 @@ Transform:
   m_GameObject: {fileID: 2112468225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -10.6, y: 2.1, z: 4.47}
+  m_LocalPosition: {x: -10.1, y: 13.05, z: 30.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
