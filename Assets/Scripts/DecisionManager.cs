@@ -18,6 +18,10 @@ public class DecisionManager : MonoBehaviour
     public GameObject leftPoster2Blocker;
     public GameObject rightPoster2Blocker;
 
+    [Header("Blockaden für Poster3")]
+    public GameObject leftPoster3Blocker;
+    public GameObject rightPoster3Blocker;
+
     private void Awake()
     {
         if (Instance == null)
@@ -169,6 +173,27 @@ public class DecisionManager : MonoBehaviour
             leftPoster2Blocker.SetActive(true);
             rightPoster2Blocker.SetActive(false);
             Debug.Log("Poster2 nicht zerrissen: Linke zu, rechte offen");
+        }
+    }
+
+        public void HandlePoster3Barriers(bool placedLeft)
+    {
+        if (leftPoster3Blocker == null || rightPoster3Blocker == null)
+        {
+            Debug.LogWarning("Poster3-Blocker nicht zugewiesen!");
+            return;
+        }
+
+        leftPoster3Blocker.SetActive(false);
+        rightPoster3Blocker.SetActive(false);
+
+        if (placedLeft)
+        {
+            rightPoster3Blocker.SetActive(true);
+        }
+        else
+        {
+            leftPoster3Blocker.SetActive(true);
         }
     }
 }

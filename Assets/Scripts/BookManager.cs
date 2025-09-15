@@ -75,6 +75,9 @@ public class BookManager : MonoBehaviour
                 PlaceBook(position1);
                 decisionMade = true;
 
+                DecisionManager.Instance.SetDecision("Poster3", true);
+                DecisionManager.Instance.HandlePoster3Barriers(true);
+
                 if (audioSource != null)
                     StartCoroutine(PlaySequence(placeStartClip, placeVoiceClip, placeFollowDelay));
             }
@@ -82,6 +85,9 @@ public class BookManager : MonoBehaviour
             {
                 PlaceBook(position2);
                 decisionMade = true;
+
+                DecisionManager.Instance.SetDecision("Poster3", false);
+                DecisionManager.Instance.HandlePoster3Barriers(false);
 
                 if (audioSource != null)
                     StartCoroutine(PlaySequence(trashStartClip, trashVoiceClip, trashFollowDelay));
