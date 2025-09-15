@@ -53946,10 +53946,10 @@ MonoBehaviour:
   volume: 0.8
   pickUpClip: {fileID: 8300000, guid: 981532d4980019048a822d2028f082ba, type: 3}
   placeStartClip: {fileID: 8300000, guid: cb2737da18013834abf610cf9a8be8d9, type: 3}
-  placeVoiceClip: {fileID: 8300000, guid: e05e46acf4b6e664ba879e9cd3e033c7, type: 3}
+  placeVoiceClip: {fileID: 8300000, guid: 88ce4e2a362f74a40bd35b876d5734b5, type: 3}
   placeFollowDelay: 0
   trashStartClip: {fileID: 8300000, guid: a03c0f8f712c60047a720ba49ab5ab66, type: 3}
-  trashVoiceClip: {fileID: 8300000, guid: 88ce4e2a362f74a40bd35b876d5734b5, type: 3}
+  trashVoiceClip: {fileID: 8300000, guid: e05e46acf4b6e664ba879e9cd3e033c7, type: 3}
   trashFollowDelay: 0
 --- !u!82 &1004053584
 AudioSource:
