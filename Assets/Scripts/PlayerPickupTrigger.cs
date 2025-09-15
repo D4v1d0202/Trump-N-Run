@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PickableObject : MonoBehaviour
+public class PlayerPickupTrigger : MonoBehaviour
 {
     public string playerTag = "Player";
     public Transform holdPoint;
