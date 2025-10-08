@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Flight")]
+    public bool canFly = true; // Flugmodus aktivierbar
+    public float flySpeed = 7f;
+    private bool isFlying = false;
     // BASIS FROM https://www.youtube.com/watch?v=f473C43s8nE&list=PLmo33sM32UcqXt29JkFr4KP4CPktmgi9o
 
     [Header("Movement")]
@@ -87,6 +91,13 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
+        // Flugmodus aktivieren/deaktivieren (Taste F)
+        if (canFly && Input.GetKeyDown(KeyCode.F))
+        {
+            isFlying = !isFlying;
+            rb.useGravity = !isFlying;
+        }
+
         // for Landing Sounds 
         if (!wasGroundedLastFrame && grounded)
         {
@@ -96,6 +107,11 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+
+        if (isFlying)
+        {
+            FlyInput();
+        }
 
         //handle drag
         if (grounded)
@@ -172,47 +188,55 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
 
-        //when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded && !IsTouchingWall())
+    horizontalInput = Input.GetAxisRaw("Horizontal");
+    verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (!isFlying)
         {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
-        else if (IsTouchingWall() && Input.GetKey("space"))
-        {
-            Climb();
+            //when to jump
+            if (Input.GetKey(jumpKey) && readyToJump && grounded && !IsTouchingWall())
+            {
+                readyToJump = false;
+                Jump();
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+            else if (IsTouchingWall() && Input.GetKey("space"))
+            {
+                Climb();
+            }
         }
     }
 
     private void MovePlayer()
     {
-        //calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        //on ground
-        if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 15f, ForceMode.Force);
-
-        //in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 15f * airMultiplier, ForceMode.Force);
-
-        /* // rotate player towards movement direction (if moving)
-         Vector3 flatDirection = new Vector3(moveDirection.x, 0f, moveDirection.z);
-         if (flatDirection.magnitude > 0.1f)
-         {
-             Quaternion targetRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
-             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
-         }*/
-
-
+        if (!isFlying)
+        {
+            //calculate movement direction
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            //on ground
+            if (grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 15f, ForceMode.Force);
+            //in air
+            else if (!grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 15f * airMultiplier, ForceMode.Force);
+        }
     }
+
+    // Flugsteuerung
+    private void FlyInput()
+    {
+        Vector3 flyDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        float up = 0f;
+        if (Input.GetKey(KeyCode.Space))
+            up += 1f;
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            up -= 1f;
+        flyDirection += Vector3.up * up;
+        rb.velocity = flyDirection.normalized * flySpeed;
+    }
+
+    //Rotation wieder aktivieren
 
     private void SpeedControl()
     {
